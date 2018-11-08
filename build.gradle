@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.2.51'
+    id 'maven'
+    id 'distribution'
+    id 'application'
+}
+
+//group 'me.sargunvohra.lib'
+version '0.0.1'
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+        url 'http://jcenter.bintray.com/'
+    }
+    mavenCentral()
+}
+
+archivesBaseName = 'PDL_Draft_Prep'
+mainClassName = "com.pdl.prepTool.Tool"
+
+dependencies {
+    compile group: 'me.sargunvohra.lib', name: 'pokekotlin', version: '2.2.3'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "com.jakewharton.fliptables:fliptables:1.0.2"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
