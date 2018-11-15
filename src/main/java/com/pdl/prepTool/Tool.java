@@ -24,25 +24,25 @@ public class Tool {
 
 
         //Production
-        String DIRECTORY = System.getenv("APP_HOME");
+        //String DIRECTORY = System.getenv("APP_HOME");
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Pokemon List file:");
 
         //For testing
-        //FILE_PATH = args[0];
+        FILE_PATH = args[0];
 
         //Production
-        FILE_PATH = sc.nextLine();
+        //FILE_PATH = sc.nextLine();
 
 
         PokeApi pokeApi = new PokeApiClient();
 
         //For testing
-        //List<String> pkmnList = Files.readAllLines(new File(FILE_PATH).toPath(), Charsets.UTF_8);
+        List<String> pkmnList = Files.readAllLines(new File(FILE_PATH).toPath(), Charsets.UTF_8);
 
         //Production
-        List<String> pkmnList = Files.readAllLines(new File(DIRECTORY, FILE_PATH).toPath(), Charsets.UTF_8);
+        //List<String> pkmnList = Files.readAllLines(new File(DIRECTORY, FILE_PATH).toPath(), Charsets.UTF_8);
 
         ArrayList<Integer> pkmnIndex = new ArrayList<>();
         ArrayList<Pokemon> party = new ArrayList<>();
@@ -78,8 +78,9 @@ public class Tool {
                 type = type1 + "/" + type2;
 
 
-                //Typing id
-                //System.out.println(activeTypes.get(0).component2().component3());
+                //Typing outputs for testing
+                //System.out.println(activeTypes.get(0).component2());
+                //System.out.println(pokeApi.getType(1));
 
             } else {
                 type1 = activeTypes.get(0).component2().component1().substring(0,1).toUpperCase() + activeTypes.get(0).component2().component1().substring(1);
