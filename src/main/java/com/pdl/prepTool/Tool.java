@@ -49,6 +49,7 @@ public class Tool {
         String[] headers = {"Name", "Type", "HP", "Attack", "Defense", "Sp.Attack", "Sp.Defense", "Speed"};
         String[][] data = new String[pkmnList.size()][7];
 
+
         for(int i=0; i<pkmnList.size(); i++){
             int index = Integer.parseInt(pkmnList.get(i));
             pkmnIndex.add(index);
