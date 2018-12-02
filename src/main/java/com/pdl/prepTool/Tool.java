@@ -37,6 +37,7 @@ public class Tool {
 
 
         PokeApi pokeApi = new PokeApiClient();
+        TypeCalculator typeCalculator =new TypeCalculator();
 
         //For testing
         List<String> pkmnList = Files.readAllLines(new File(FILE_PATH).toPath(), Charsets.UTF_8);
@@ -49,7 +50,6 @@ public class Tool {
         String[] headers = {"Name", "Type", "HP", "Attack", "Defense", "Sp.Attack", "Sp.Defense", "Speed"};
         String[][] data = new String[pkmnList.size()][7];
 
-
         for(int i=0; i<pkmnList.size(); i++){
             int index = Integer.parseInt(pkmnList.get(i));
             pkmnIndex.add(index);
@@ -60,6 +60,7 @@ public class Tool {
         for(int i = 0; i<party.size(); i++) {
 
             Pokemon activePkmn = party.get(i);
+            typeCalculator.enterPkmn(activePkmn);
 
             List<PokemonType> activeTypes = activePkmn.getTypes();
             List<PokemonStat> activePkStats = activePkmn.getStats();
@@ -77,17 +78,12 @@ public class Tool {
                 type2 = activeTypes.get(0).component2().component1().substring(0,1).toUpperCase() + activeTypes.get(0).component2().component1().substring(1);
 
                 type = type1 + "/" + type2;
-
-
-                //Typing outputs for testing
-                //System.out.println(activeTypes.get(0).component2());
-                //System.out.println(pokeApi.getType(1));
-
             } else {
                 type1 = activeTypes.get(0).component2().component1().substring(0,1).toUpperCase() + activeTypes.get(0).component2().component1().substring(1);
                 type2 = "";
 
                 type = type1 + type2;
+                System.out.println(typeCalculator.getDoubleDamageFrom());
             }
 
             String hp = String.valueOf(activePkStats.get(5).component3());
