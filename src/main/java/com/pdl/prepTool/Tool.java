@@ -70,6 +70,7 @@ public class Tool {
             String type1;
             String type2;
             String type;
+
             //Example:
             //int hp = activePkStats.get(5).component3();
 
