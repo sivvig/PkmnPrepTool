@@ -37,7 +37,7 @@ public class Tool {
 
 
         PokeApi pokeApi = new PokeApiClient();
-        TypeCalculator typeCalculator =new TypeCalculator();
+        TypeCalculator typeCalculator = new TypeCalculator();
 
         //For testing
         List<String> pkmnList = Files.readAllLines(new File(FILE_PATH).toPath(), Charsets.UTF_8);
@@ -47,8 +47,8 @@ public class Tool {
 
         ArrayList<Integer> pkmnIndex = new ArrayList<>();
         ArrayList<Pokemon> party = new ArrayList<>();
-        String[] headers = {"Name", "Type", "HP", "Attack", "Defense", "Sp.Attack", "Sp.Defense", "Speed"};
-        String[][] data = new String[pkmnList.size()][7];
+        String[] headers = {"Name", "Type", "HP", "Attack", "Defense", "Sp.Attack", "Sp.Defense", "Speed", "2x Weak", "4x Weak", "2x Resist", "4x Resist", "Immune"};
+        String[][] data = new String[pkmnList.size()][8];
 
         for(int i=0; i<pkmnList.size(); i++){
             int index = Integer.parseInt(pkmnList.get(i));
@@ -71,6 +71,14 @@ public class Tool {
             String type2;
             String type;
 
+            String weak2x;
+            String weak4x;
+
+            String resist2x;
+            String resist4x;
+
+            String immune;
+
             //Example:
             //int hp = activePkStats.get(5).component3();
 
@@ -79,12 +87,27 @@ public class Tool {
                 type2 = activeTypes.get(0).component2().component1().substring(0,1).toUpperCase() + activeTypes.get(0).component2().component1().substring(1);
 
                 type = type1 + "/" + type2;
+
+                weak2x = "WIP";
+                weak4x = "WIP";
+
+                resist2x = "WIP";
+                resist4x = "WIP";
+
+                immune = "WIP";
             } else {
                 type1 = activeTypes.get(0).component2().component1().substring(0,1).toUpperCase() + activeTypes.get(0).component2().component1().substring(1);
                 type2 = "";
 
                 type = type1 + type2;
-                System.out.println(typeCalculator.getDoubleDamageFrom());
+
+                weak2x = typeCalculator.getPkmn2xWeak();
+                weak4x = typeCalculator.getPkmn4xWeak();
+
+                resist2x = typeCalculator.getPkmn2xResist();
+                resist4x = typeCalculator.getPkmn4xResist();
+
+                immune = typeCalculator.getPkmnImmunity();
             }
 
             String hp = String.valueOf(activePkStats.get(5).component3());
@@ -94,7 +117,7 @@ public class Tool {
             String spDef = String.valueOf(activePkStats.get(1).component3());
             String speed = String.valueOf(activePkStats.get(0).component3());
 
-            String[] rowData = {name, type, hp, attack, defense, spAtk, spDef, speed};
+            String[] rowData = {name, type, hp, attack, defense, spAtk, spDef, speed, weak2x, weak4x, resist2x, resist4x, immune};
             data[i] = rowData;
         }
 

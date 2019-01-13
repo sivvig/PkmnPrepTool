@@ -81,10 +81,56 @@ import java.util.List;
         }
     }
 
-    String getDoubleDamageFrom(){
+    String getPkmn2xWeak(){
         // return this.doubleDamageFrom1;
-        return doubleDamageFrom1.get(0).getName();
+
+        StringBuilder weak2xString = new StringBuilder();
+
+        //Needs differing logic when dealing with dual-types
+        for (int i=0; i<doubleDamageFrom1.size(); i++) {
+            String weakness = doubleDamageFrom1.get(i).getName().substring(0, 1).toUpperCase() + doubleDamageFrom1.get(i).getName().substring(1);
+            if(i==doubleDamageFrom1.size()-1) {
+                weak2xString.append(weakness);
+            } else {
+                weak2xString.append(weakness).append(", ");
+            }
+        }
+        return weak2xString.toString();
     }
 
+    String getPkmn4xWeak(){
 
+        if(numTypes>1) {
+            return "WIP";
+        } else {
+            return "N/A";
+        }
+    }
+
+    String getPkmn2xResist() {
+
+        StringBuilder resist2xString = new StringBuilder();
+
+        for (int i=0; i<halfDamageFrom1.size(); i++) {
+            String weakness = halfDamageFrom1.get(i).getName().substring(0, 1).toUpperCase() + halfDamageFrom1.get(i).getName().substring(1);
+            if(i==halfDamageFrom1.size()-1) {
+                resist2xString.append(weakness);
+            } else {
+                resist2xString.append(weakness).append(", ");
+            }
+        }
+        return resist2xString.toString();
+    }
+
+    String getPkmn4xResist(){
+        if (numTypes > 1) {
+            return  "WIP";
+        } else {
+            return "N/A";
+        }
+    }
+
+    String getPkmnImmunity(){
+        return  "WIP";
+    }
 }
